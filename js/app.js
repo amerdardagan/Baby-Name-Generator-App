@@ -11,13 +11,23 @@ function loadNames (e) {
     const amount = document.getElementById ('quantity').value;
 
     //Build URL
-    let url = 'https://uinames.com/api/?'; //main URL 
+    let url = 'https://uinames.com/api/?'; //main URL on which will add parameters below
     //Read the country and append to main URL
     if (country !== '') { //if user picks country
-        url += `region=${country}&`; //chenage url to fit selected country from html form
-
-        console.log (url);
+        url += `region=${country}&`; //chenage url to fit selected country from html form/filter by country
     }
+
+    //Read the gender and append to main URL
+    if (genre !== '') { //if user picks gender
+        url += `gender=${genre}&`; //adding 6 because adding after/filter by gender
+    }
+
+    //Read the amount and append to main URL
+    if (amount !== '') { //if user picks amount
+        url += `amount=${amount}`; //cheage url to fit selected amount from html form/filter by amount
+    }
+
+    console.log (url)
 
 
 }
