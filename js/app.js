@@ -27,7 +27,25 @@ function loadNames (e) {
         url += `amount=${amount}`; //cheage url to fit selected amount from html form/filter by amount
     }
 
-    console.log (url)
+    //Ajax Call (4 steps)
+
+    const xhr = new XMLHttpRequest ();
+
+    xhr.open ('GET', url , true); //url-based on user parameters above, url will be requested
+
+    xhr.onload = function () {
+        if (this.status === 200) {
+
+            const names = JSON.parse (this.responseText);
+
+            console.log (names)
+
+        }
+    }
+
+    xhr.send ();
+
+
 
 
 }
