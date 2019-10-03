@@ -38,8 +38,18 @@ function loadNames (e) {
 
             const names = JSON.parse (this.responseText);
 
-            console.log (names)
+            //Insert objects/strings into HTML
+            let html ='<h2>Generate Baby Names</h2>'
+            html+='<ul class="list">'
+                names.forEach (function (name) {
+                    html += `
+                    <li>${name.name}</li>
+                    `;
+                });
+                    
+            html+='</ul>';
 
+            document.querySelector ('#result').innerHTML = html;
         }
     }
 
