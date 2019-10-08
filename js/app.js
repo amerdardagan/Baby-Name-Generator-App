@@ -27,6 +27,7 @@ function loadNames (e) {
         url += `amount=${amount}`; //cheage url to fit selected amount from html form/filter by amount
     }
 
+    /*
     //Ajax Call (4 steps)
 
     const xhr = new XMLHttpRequest ();
@@ -54,8 +55,28 @@ function loadNames (e) {
     }
 
     xhr.send ();
+     */
 
+     fetch (url)
 
+     .then (function (response) {
+         return response.json ()
+     })
+
+     .then (function (names){
+         console.log (names)
+
+         let html = '<h2>Generate Baby Names</h2>'
+
+        names.forEach (function (name){
+            html += '<ul class="list">'
+                html += `<li>${name.name}</li>`
+            html += '</ul>'
+        
+        });
+
+        document.getElementById ('result').innerHTML = html
+     })
 
 
 }
