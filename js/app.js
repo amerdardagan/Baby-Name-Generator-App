@@ -1,3 +1,5 @@
+/*
+
 document.querySelector ('#generate-names').addEventListener ('submit', loadNames);
 
 //Execute the function to quaery API
@@ -25,7 +27,7 @@ function loadNames (e) {
     //Read the amount and append to main URL
     if (amount !== '') { //if user picks amount
         url += `amount=${amount}`; //cheage url to fit selected amount from html form/filter by amount
-    }
+    }*/
 
     /*
     //Ajax Call (4 steps)
@@ -57,6 +59,8 @@ function loadNames (e) {
     xhr.send ();
      */
 
+     /*
+
      fetch (url)
 
      .then (function (response) {
@@ -78,5 +82,72 @@ function loadNames (e) {
         document.getElementById ('result').innerHTML = html
      })
 
+
+}*/
+
+//BABY NAME GENERATOR USING ARROW FUNCTIONS
+
+document.querySelector ('#generate-names').addEventListener ('submit', loadNames);
+
+//Execute the function to quaery API
+
+function loadNames (e) {
+    e.preventDefault ();
+
+    //Read the values from the Form and create variables
+    const country = document.getElementById ('country').value;
+    const genre = document.getElementById ('genre').value;
+    const amount = document.getElementById ('quantity').value;
+
+    //Build URL
+    let url = 'https://uinames.com/api/?'; //main URL on which will add parameters below
+    //Read the country and append to main URL
+    if (country !== '') { //if user picks country
+        url += `region=${country}&`; //chenage url to fit selected country from html form/filter by country
+    }
+
+    //Read the gender and append to main URL
+    if (genre !== '') { //if user picks gender
+        url += `gender=${genre}&`; //adding 6 because adding after/filter by gender
+    }
+
+    //Read the amount and append to main URL
+    if (amount !== '') { //if user picks amount
+        url += `amount=${amount}`; //cheage url to fit selected amount from html form/filter by amount
+    }
+
+      /*fetch (url)
+
+      .then (response => response.json ())*/ //will place it in async function below!
+     
+    getNames (url)
+
+      .then (names => {
+
+        let html = '<h2>Generate Baby Names</h2>'
+        let nameObject = names.names
+
+        nameObject.forEach (name => { //now loops through objects not arrays
+            html += '<ul class="list">'
+                html += `<li>${name.name}</li>`
+                html += '</ul>'
+        });
+
+        
+
+        document.getElementById ('result').innerHTML = html
+     })
+ 
+        .catch (error => console.log (error))
+
+}
+
+async function getNames(url) {
+    const response = await fetch (url)
+
+    const names = await response.json ();
+    return {
+        names
+    }
 
 }
